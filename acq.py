@@ -21,9 +21,10 @@ zillow_sql = "SELECT *\
                 LEFT JOIN storytype USING(storytypeid)\
                 LEFT JOIN typeconstructiontype USING(typeconstructiontypeid)\
                 LEFT JOIN unique_properties USING(parcelid)\
-                WHERE properties_2017.id IN (SELECT DISTINCT id\
-                                                FROM properties_2017\
-                                                WHERE predictions_2017.transactiondate LIKE '2017%') AND latitude IS NOT NULL;"
+                WHERE properties_2017.id IN(\
+                SELECT DISTINCT id\
+                FROM properties_2017\
+                WHERE predictions_2017.transactiondate LIKE '2017%%') AND latitude IS NOT NULL;"
 
 #acquires zillow dataset
 def get_zillow_data():
